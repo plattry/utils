@@ -1,0 +1,28 @@
+{
+    "name": "plattry/utils",
+    "description": "The plattry utils package",
+    "keywords": [
+        "plattry",
+        "utils"
+    ],
+    "type": "library",
+    "license": "GPL-3.0",
+    "autoload": {
+        "psr-4": {
+            "Plattry\\Utils\\": "src/"
+        },
+        "exclude-from-classmap": [
+          "/test/"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Andrew Lee",
+            "email": "sixser@foxmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^8.0"
+    }
+}
