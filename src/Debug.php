@@ -38,16 +38,23 @@ class Debug
             $t::class, $t->getMessage(), $t->getCode(), $t->getFile(), $t->getLine(), static::getCurrTime()
         );
 
+        $flags = JSON_FORCE_OBJECT | JSON_UNESCAPED_UNICODE;
+
         foreach ($t->getTrace() as $index => $trace) {
             if (isset($trace['file']))
                 $content .= sprintf(
                     "from %d: %s(%d) on %s(%s)\r\n",
-                    $index, $trace['file'], $trace['line'], $trace['function'], json_encode($trace['args'], JSON_UNESCAPED_UNICODE)
+                    $index, $trace['file'], $trace['line'], $trace['function'], json_encode($trace['args'], $flags)
+                );
+            elseif (isset($trace['class']))
+                $content .= sprintf(
+                    "from %d: %s on %s(%s)\r\n",
+                    $index, $trace['class'], $trace['function'], json_encode($trace['args'], $flags)
                 );
             else
                 $content .= sprintf(
-                    "from %d: %s on %s(%s)\r\n",
-                    $index, $trace['class'], $trace['function'], json_encode($trace['args'], JSON_UNESCAPED_UNICODE)
+                    "from %d: on %s(%s)\r\n",
+                    $index, $trace['function'], json_encode($trace['args'], $flags)
                 );
         }
 
